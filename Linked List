@@ -1,0 +1,141 @@
+#include<iostream>
+#include<cmath>
+
+#include<math.h>
+using namespace std;
+
+class node{
+  public:
+  int data;
+  node* next;
+  
+  node(int val){
+    data= val;
+    next=NULL;
+    
+    
+  }
+};
+  //Insertion at tail;
+  
+  void InsertAtTail(node* &head,int val){
+    node* n= new node(val);
+    if(head==NULL){
+      head=n;
+      return ;
+    }
+    node* temp=head;
+    while(temp->next!=NULL){
+      temp=temp->next;
+    }
+    temp->next=n;
+    
+  }
+  //display
+  void display(node* head){
+    node* temp=head;
+    
+    while(temp!=NULL){
+      cout<<temp->data<<"->";
+      temp=temp->next;
+    }
+    cout<<endl;
+  }
+  //Insert At head
+  void InsertAtHead(node* &head,int val){
+    node* n=new node(val); 
+    
+    n->next=head;
+    head=n;
+    
+  }
+  //searching
+  
+  bool searching(node* head,int key){
+    node* temp=head;
+    while(temp!=NULL){
+      if(temp->data==key){
+        return true;
+      }
+      temp=temp->next;
+    }
+    return false;
+  }
+  // deletion 
+  
+  
+  //Delete at head;
+  
+  void deleteAtHead(node* &head){
+    node* todelete=head;
+    head=head->next;
+    delete todelete;
+  }
+  void deletion(node* &head,int val){
+    if(head==NULL){
+      return;
+      
+    }
+    if(head->next==NULL){
+      deleteAtHead(head);
+      return;
+    }
+    node* temp= head;
+    while(temp->next->data!=val){
+      temp=temp->next;
+    }
+    node* todelete=temp->next;
+    temp->next=temp->next->next;
+    delete todelete;
+  }
+  //Reverse A linked list
+  
+  node* reverse(node* head){
+    node* prev =NULL;
+    node* curr=head;
+    node* nextptr;
+   
+    while(curr!=NULL){
+      nextptr=curr->next;
+      curr->next=prev;
+      prev=curr;
+      curr=nextptr; 
+      
+    }
+    return prev;
+  }
+  
+
+
+
+
+
+int main(){
+  node* head=NULL;
+  InsertAtTail(head,1);
+  InsertAtTail(head,2);
+  InsertAtTail(head,3);
+  InsertAtTail(head,5);
+  InsertAtTail(head,6);
+  
+  display(head);
+  InsertAtHead(head,4);
+  display(head);
+  //cout<<searching(head,3)<<endl;
+  deletion(head,3);
+  display(head);
+  deleteAtHead(head);
+  display(head);
+  node* newhead=reverse(head);
+  display(newhead);
+  
+  
+ 
+  
+  
+   
+  
+  
+
+        return 0;
+};
